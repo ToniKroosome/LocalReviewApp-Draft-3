@@ -22,3 +22,7 @@ export STRIPE_SECRET_KEY=sk_test_your_key
 ```
 
 Without real keys the demo will fall back to placeholders and payments won't succeed.
+
+## Mobile App Packaging
+
+See [docs/mobile-app.md](docs/mobile-app.md) for steps to wrap the app using Capacitor and publish to Android and iOS.
