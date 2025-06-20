@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Star, Camera, CheckCircle, User, TrendingUp, Calendar, Filter, Plus, X, ChevronDown, LogOut, Sparkles, MapPin, Globe, Heart, MessageCircle, Award, Clock, ArrowLeft } from 'lucide-react';
+import { Search, Star, Camera, CheckCircle, User, TrendingUp, Calendar, Filter, Plus, X, ChevronDown, LogOut, Sparkles, MapPin, Globe, Heart, MessageCircle, Award, Clock, ArrowLeft, Monitor } from 'lucide-react';
 import { initialSampleReviews } from './data/sampleReviews';
 import Header from './components/Header';
 import ItemList from './components/ItemList';
@@ -297,8 +297,17 @@ const App = () => {
         );
     }
     
- return (
- <div className={`min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-gray-100 font-sans antialiased pt-12 ${mobilePreview ? 'mobile-preview' : ''}`}> 
+  return (
+  <div className={`min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-gray-100 font-sans antialiased pt-12 ${mobilePreview ? 'mobile-preview' : ''}`}> 
+    {mobilePreview && (
+      <button
+        onClick={toggleMobilePreview}
+        className="fixed top-2 right-2 z-30 bg-gray-800 text-gray-100 p-1 rounded-full shadow hover:bg-gray-700"
+        title="Desktop preview"
+      >
+        <Monitor size={16} />
+      </button>
+    )}
     {/* Enhanced Header */}
     <Header
       showHeader={showHeader}

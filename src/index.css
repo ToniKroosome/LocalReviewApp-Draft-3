@@ -14,7 +14,9 @@ body {
 .mobile-preview {
   max-width: 375px;
   margin: 0 auto;
-  border: 4px solid #333;
-  border-radius: 1rem;
-  overflow: hidden;
+  border: 8px solid #222;
+  border-radius: 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  min-height: 100vh;
 }
