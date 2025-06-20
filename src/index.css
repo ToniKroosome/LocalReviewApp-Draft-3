@@ -30,7 +30,7 @@ body {
   border: 4px solid #222;
   border-radius: 1.25rem;
   overflow-y: auto;
-  overflow-x: hidden;
+  overflow-x: auto; /* <-- Enable horizontal scroll bar if content overflows */
   box-shadow: 0 0 40px 0 #000a;
   background: #18181b;
   box-sizing: border-box;
@@ -65,7 +65,7 @@ body {
   max-width: 100% !important;
   margin: 0 !important;
   box-sizing: border-box;
-  overflow-x: hidden;          /* Prevent inner horizontal scroll */
+  overflow-x: auto;          /* <-- Allow horizontal scroll in content */
 }
 
 /* Fix grid width so it never overflows frame */
@@ -75,7 +75,7 @@ body {
   max-width: 100% !important;
   margin: 0 !important;
   box-sizing: border-box;
-  overflow-x: hidden;          /* Prevent inner horizontal scroll */
+  overflow-x: auto;          /* <-- Allow horizontal scroll in grid */
 }
 
 /* Optional: fake notch for realism */
