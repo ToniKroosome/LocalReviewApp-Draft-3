@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, Search, Filter, LogOut, Smartphone } from 'lucide-react';
+import { Award, Search, Filter, LogOut } from 'lucide-react';
 
 const Header = ({
   showHeader,
@@ -13,8 +13,6 @@ const Header = ({
   creditsBalance,
   language,
   setLanguage,
-  mobilePreview,
-  toggleMobilePreview,
   GoogleIcon,
 }) => (
   <header
@@ -68,14 +66,6 @@ const Header = ({
         <span className="text-xs text-gray-400 ml-1">{creditsBalance}</span>
         <button onClick={() => setLanguage(language === 'en' ? 'th' : 'en')} className="px-2 py-1 rounded-lg bg-gray-800 text-gray-100 text-xs ml-1">
           {language === 'en' ? '🇹🇭' : '🇬🇧'}
-        </button>
-        <button
-          onClick={toggleMobilePreview}
-          className={`p-2 text-gray-400 hover:text-blue-500 hover:bg-gray-800 rounded-lg ml-1 border-2 border-blue-400 ${mobilePreview ? 'bg-blue-950 text-blue-300' : ''}`}
-          title={mobilePreview ? 'Switch to Desktop View' : 'Switch to Mobile View'}
-          aria-label={mobilePreview ? 'Switch to Desktop View' : 'Switch to Mobile View'}
-        >
-          <Smartphone size={20} />
         </button>
       </div>
     </div>
