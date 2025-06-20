@@ -46,6 +46,10 @@ body {
   padding: 1rem 1.5rem;
 }
 
+/* Force single-column layout in mobile preview */
+.mobile-preview .grid {
+  grid-template-columns: 1fr !important;
+}
 
 /* Improve spacing for all content in mobile preview */
 .mobile-preview .content,
