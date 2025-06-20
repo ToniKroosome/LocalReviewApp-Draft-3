@@ -18,7 +18,7 @@ const Header = ({
   GoogleIcon,
 }) => (
   <header
-    className={`header relative bg-gray-900/90 backdrop-blur-xl border-b border-gray-800/50 fixed top-0 w-full z-20 transition-transform duration-300 ${showHeader ? 'translate-y-0' : '-translate-y-full'}`}
+    className={`header bg-gray-900/90 backdrop-blur-xl border-b border-gray-800/50 absolute top-0 left-0 w-full z-20 transition-transform duration-300 ${showHeader ? 'translate-y-0' : '-translate-y-full'}`}
     style={{ minHeight: '48px', padding: '0.3rem 0' }}
   >
     <div className="max-w-4xl mx-auto flex items-center justify-between px-3 py-1 gap-2">
