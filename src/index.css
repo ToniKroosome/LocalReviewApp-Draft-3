@@ -37,7 +37,6 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  /* Remove padding-top, handled by absolute header/button */
 
   scrollbar-width: thin;           /* Firefox */
   scrollbar-color: #222 #18181b;   /* thumb color, track color */
@@ -65,7 +64,7 @@ body {
   max-width: 100% !important;
   margin: 0 !important;
   box-sizing: border-box;
-  overflow-x: auto;          /* <-- Allow horizontal scroll in content */
+  overflow-x: auto !important;          /* <-- Allow horizontal scroll in content */
 }
 
 /* Fix grid width so it never overflows frame */
@@ -75,7 +74,18 @@ body {
   max-width: 100% !important;
   margin: 0 !important;
   box-sizing: border-box;
-  overflow-x: auto;          /* <-- Allow horizontal scroll in grid */
+  overflow-x: auto !important;          /* <-- Allow horizontal scroll in grid */
+}
+
+/* Utility class for horizontal scrollable rows */
+.horizontal-scroll {
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+.horizontal-scroll > * {
+  display: inline-block;
+  vertical-align: top;
 }
 
 /* Optional: fake notch for realism */
