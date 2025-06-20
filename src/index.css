@@ -37,6 +37,7 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
+  padding-top: 56px; /* <-- Add this line to prevent top button/header cropping */
 
   scrollbar-width: thin;           /* Firefox */
   scrollbar-color: #222 #18181b;   /* thumb color, track color */
