@@ -20,7 +20,7 @@ const Header = ({
     style={{ minHeight: '32px', padding: '0.15rem 0' }}
   >
     <div className="absolute top-0 left-1 text-[10px] text-gray-400 pointer-events-none">
-      version 2.2
+      version 2.3
     </div>
     <div className="max-w-4xl mx-auto flex items-center justify-between px-3 py-0.5 gap-2">
       <div className="flex items-center gap-2">
@@ -30,7 +30,7 @@ const Header = ({
         <h1 className="text-base font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400 tracking-tight">
           ReviewAnything
         </h1>
-        <span className="text-xs text-gray-400 ml-1">version 2.2</span>
+        <span className="text-xs text-gray-400 ml-1">version 2.3</span>
       </div>
       <div className="flex items-center gap-1">
         <button onClick={toggleSearchBar} className="p-1 text-gray-400 hover:text-gray-100 hover:bg-gray-800/50 rounded-lg" title="Search">

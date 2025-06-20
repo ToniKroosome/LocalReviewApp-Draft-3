@@ -1,5 +1,6 @@
 const express = require('express');
 const Stripe = require('stripe');
+const { generatePromptPayQR } = require('./promptpay');
 const app = express();
 app.use(express.json());
 
@@ -28,6 +29,17 @@ app.post('/create-checkout-session', async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Failed to create session' });
+  }
+});
+
+// Generate and display PromptPay QR code
+app.get('/pay', async (req, res) => {
+  const { recipient, amount } = req.query;
+  try {
+    const qrUrl = await generatePromptPayQR(recipient, amount);
+    res.send(`<!doctype html><html><body><img src="${qrUrl}" alt="PromptPay QR"></body></html>`);
+  } catch (err) {
+    res.status(400).send(err.message);
   }
 });
 
