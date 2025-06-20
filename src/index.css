@@ -15,7 +15,10 @@ body {
 /* Main content should take full width for responsive layouts */
 .main-content {
   width: 100%;
-  max-width: 100%;
+  /* Constrain to typical phone size */
+  /* Allow scrolling so content never gets cut off */
+  overflow-x: auto;
+  overflow-y: auto;
   margin: 0;
   padding: 0;
 }
