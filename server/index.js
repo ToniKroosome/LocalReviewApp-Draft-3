@@ -2,6 +2,16 @@ const express = require('express');
 const Stripe = require('stripe');
 const { generatePromptPayQR } = require('./promptpay');
 const app = express();
+// Allow requests from any origin so the React frontend running on a different
+// port can communicate with this server during development.
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  next();
+});
 app.use(express.json());
 
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_placeholder');
