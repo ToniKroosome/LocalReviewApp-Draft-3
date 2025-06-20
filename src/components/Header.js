@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, Search, Filter, LogOut } from 'lucide-react';
+import { Award, Search, Filter, LogOut, Smartphone } from 'lucide-react';
 
 const Header = ({
   showHeader,
@@ -13,16 +13,15 @@ const Header = ({
   creditsBalance,
   language,
   setLanguage,
+  mobilePreview,
+  toggleMobilePreview,
   GoogleIcon,
 }) => (
   <header
-    className={`relative bg-gray-900/90 backdrop-blur-xl border-b border-gray-800/50 fixed top-0 w-full z-20 transition-transform duration-300 ${showHeader ? 'translate-y-0' : '-translate-y-full'}`}
-    style={{ minHeight: '32px', padding: '0.15rem 0' }}
+    className={`header relative bg-gray-900/90 backdrop-blur-xl border-b border-gray-800/50 fixed top-0 w-full z-20 transition-transform duration-300 ${showHeader ? 'translate-y-0' : '-translate-y-full'}`}
+    style={{ minHeight: '48px', padding: '0.3rem 0' }}
   >
-    <div className="absolute top-0 left-1 text-[10px] text-gray-400 pointer-events-none">
-      version 2.5
-    </div>
-    <div className="max-w-4xl mx-auto flex items-center justify-between px-3 py-0.5 gap-2">
+    <div className="max-w-4xl mx-auto flex items-center justify-between px-3 py-1 gap-2">
       <div className="flex items-center gap-2">
         <div className="w-6 h-6 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
           <Award className="text-white" size={16} />
@@ -69,6 +68,14 @@ const Header = ({
         <span className="text-xs text-gray-400 ml-1">{creditsBalance}</span>
         <button onClick={() => setLanguage(language === 'en' ? 'th' : 'en')} className="px-2 py-1 rounded-lg bg-gray-800 text-gray-100 text-xs ml-1">
           {language === 'en' ? '🇹🇭' : '🇬🇧'}
+        </button>
+        <button
+          onClick={toggleMobilePreview}
+          className={`p-2 text-gray-400 hover:text-blue-500 hover:bg-gray-800 rounded-lg ml-1 border-2 border-blue-400 ${mobilePreview ? 'bg-blue-950 text-blue-300' : ''}`}
+          title={mobilePreview ? 'Switch to Desktop View' : 'Switch to Mobile View'}
+          aria-label={mobilePreview ? 'Switch to Desktop View' : 'Switch to Mobile View'}
+        >
+          <Smartphone size={20} />
         </button>
       </div>
     </div>
