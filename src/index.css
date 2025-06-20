@@ -124,11 +124,12 @@ body {
   max-width: none;
 }
 
+/* REMOVE ABSOLUTE POSITIONING AND PADDING SO HEADER IS RESPONSIVE */
 .mobile-preview .header {
-  padding: 1rem 1.5rem;
-  position: absolute;
-  top: 0;
-  left: 0;
+  /* padding: 1rem 1.5rem; */
+  /* position: absolute; */
+  /* top: 0; */
+  /* left: 0; */
   width: 100%;
   z-index: 20;
   background: #18181b;
