@@ -27,3 +27,9 @@ Without real keys the demo will fall back to placeholders and payments won't suc
 ## Mobile App Packaging
 
 See [docs/mobile-app.md](docs/mobile-app.md) for steps to wrap the app using Capacitor and publish to Android and iOS. A starter `capacitor.config.ts` is included for convenience.
+
+## Mobile Preview Mode
+
+The app includes a **phone view** toggle for quickly testing mobile layouts in the browser. When enabled, a simulated phone frame constrains the width to about 390&nbsp;px and adds a shadowed border. All content remains scrollable within this frame.
+
+Developers can maintain this feature by editing the `.mobile-preview` CSS block in `src/index.css` and the toggle logic in `src/App.js` and `src/components/Header.js`. Keep interactive elements sized for touch input and avoid fixed widths that could cause horizontal clipping.
