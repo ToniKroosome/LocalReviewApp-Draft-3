@@ -50,6 +50,7 @@ const App = () => {
     const [showSearchBar, setShowSearchBar] = useState(false);
     const [showFilters, setShowFilters] = useState(false);
     const [mobilePreview, setMobilePreview] = useState(false);
+
     const toggleMobilePreview = () => setMobilePreview(v => !v);
 
     useEffect(() => {
@@ -291,8 +292,14 @@ const App = () => {
         );
     }
 
+    // ---- MINIMAL EDIT TO PREVENT HORIZONTAL SCROLLBAR IN MOBILE PREVIEW ----
+    // Add style={{ overflowX: mobilePreview ? 'hidden' : undefined }} to the main wrapper div
+
     return (
-        <div className={`min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-gray-100 font-sans antialiased pt-14 px-2 sm:px-6 transition-all duration-200 ${mobilePreview ? 'mobile-preview' : ''}`}>
+        <div
+            className={`min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-gray-100 font-sans antialiased pt-14 px-2 sm:px-6 transition-all duration-200 ${mobilePreview ? 'mobile-preview' : ''}`}
+            style={mobilePreview ? { overflowX: 'hidden' } : undefined}
+        >
             {mobilePreview && (
                 <button
                     onClick={toggleMobilePreview}

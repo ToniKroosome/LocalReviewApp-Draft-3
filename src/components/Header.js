@@ -29,7 +29,7 @@ const Header = ({
         <h1 className="text-base font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400 tracking-tight">
           ReviewAnything
         </h1>
-        <span className="text-xs text-gray-400 ml-1">v.2.6</span>
+        <span className="text-xs text-gray-400 ml-1">v.2.7</span>
       </div>
       <div className="flex items-center gap-1">
         <button onClick={toggleSearchBar} className="p-1 text-gray-400 hover:text-gray-100 hover:bg-gray-800/50 rounded-lg" title="Search">
@@ -71,9 +71,9 @@ const Header = ({
         </button>
         <button
           onClick={toggleMobilePreview}
-          className={`p-1 rounded-lg ml-1 text-gray-400 hover:text-blue-500 hover:bg-gray-800/50 ${mobilePreview ? 'bg-blue-950 text-blue-300 border border-blue-400' : ''}`}
-          aria-label={mobilePreview ? 'Switch to desktop view' : 'Switch to mobile view'}
-          title={mobilePreview ? 'Desktop view' : 'Mobile view'}
+          className={`p-1 rounded-lg ml-1 border-2 ${mobilePreview ? 'bg-blue-950 text-blue-300 border-blue-400' : 'text-gray-400 border-transparent hover:text-blue-500 hover:bg-gray-800/50'}`}
+          title={mobilePreview ? 'Switch to Desktop View' : 'Switch to Mobile View'}
+          aria-label={mobilePreview ? 'Desktop view' : 'Mobile preview'}
         >
           <Smartphone size={16} />
         </button>
