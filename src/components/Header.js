@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, Search, Filter, LogOut } from 'lucide-react';
+import { Award, Search, Filter, LogOut, Smartphone } from 'lucide-react';
 
 const Header = ({
   showHeader,
@@ -13,6 +13,8 @@ const Header = ({
   creditsBalance,
   language,
   setLanguage,
+  mobilePreview,
+  toggleMobilePreview,
   GoogleIcon,
 }) => (
   <header
@@ -69,6 +71,13 @@ const Header = ({
         <span className="text-xs text-gray-400 ml-1">{creditsBalance}</span>
         <button onClick={() => setLanguage(language === 'en' ? 'th' : 'en')} className="px-2 py-1 rounded-lg bg-gray-800 text-gray-100 text-xs ml-1">
           {language === 'en' ? '🇹🇭' : '🇬🇧'}
+        </button>
+        <button
+          onClick={toggleMobilePreview}
+          className={`p-1 text-gray-400 hover:text-gray-100 hover:bg-gray-800/50 rounded-lg ml-1 ${mobilePreview ? 'text-blue-400' : ''}`}
+          title="Mobile preview"
+        >
+          <Smartphone size={14} />
         </button>
       </div>
     </div>
