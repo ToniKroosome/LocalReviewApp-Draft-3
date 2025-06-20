@@ -38,12 +38,22 @@ body {
   display: flex;
   flex-direction: column;
 
-  /* Hide scrollbars for all browsers */
-  scrollbar-width: none;          /* Firefox */
-  -ms-overflow-style: none;       /* IE and Edge */
+  scrollbar-width: thin;           /* Firefox */
+  scrollbar-color: #222 #18181b;   /* thumb color, track color */
+  -ms-overflow-style: none;        /* IE and Edge */
 }
+
+/* Custom scrollbar for Chrome, Safari, Opera */
 .mobile-preview::-webkit-scrollbar {
-  display: none;                  /* Chrome, Safari, Opera */
+  width: 8px;
+  background: #18181b;             /* Track color */
+}
+.mobile-preview::-webkit-scrollbar-thumb {
+  background: #222;                /* Thumb color */
+  border-radius: 8px;
+}
+.mobile-preview::-webkit-scrollbar-corner {
+  background: #18181b;
 }
 
 /* Add device padding */
