@@ -37,7 +37,7 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  padding-top: 56px; /* <-- Add this line to prevent top button/header cropping */
+  /* Remove padding-top, handled by absolute header/button */
 
   scrollbar-width: thin;           /* Firefox */
   scrollbar-color: #222 #18181b;   /* thumb color, track color */
@@ -116,4 +116,20 @@ body {
 
 .mobile-preview .header {
   padding: 1rem 1.5rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 20;
+  background: #18181b;
+  border-top-left-radius: 1.1rem;
+  border-top-right-radius: 1.1rem;
+}
+
+/* Example for a top-right button inside the frame */
+.mobile-preview .top-action {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 30;
 }
