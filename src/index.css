@@ -30,24 +30,31 @@ body {
   border: 4px solid #222;
   border-radius: 1.25rem;
   overflow-y: auto;
-  overflow-x: hidden;   /* <--- This hides the side scroll bar */
+  overflow-x: hidden;
   box-shadow: 0 0 40px 0 #000a;
   background: #18181b;
   box-sizing: border-box;
   position: relative;
   display: flex;
   flex-direction: column;
+
+  /* Hide scrollbars for all browsers */
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* IE and Edge */
+}
+.mobile-preview::-webkit-scrollbar {
+  display: none;                  /* Chrome, Safari, Opera */
 }
 
 /* Add device padding */
 .mobile-preview .main-content,
 .mobile-preview .content {
   padding: 12px 0 !important;
-  width: 100% !important;      /* <--- Ensure 100% of parent, not viewport */
+  width: 100% !important;
   max-width: 100% !important;
   margin: 0 !important;
   box-sizing: border-box;
-  overflow-x: hidden;          /* <--- Prevent inner horizontal scroll */
+  overflow-x: hidden;          /* Prevent inner horizontal scroll */
 }
 
 /* Fix grid width so it never overflows frame */
@@ -57,7 +64,7 @@ body {
   max-width: 100% !important;
   margin: 0 !important;
   box-sizing: border-box;
-  overflow-x: hidden;          /* <--- Prevent inner horizontal scroll */
+  overflow-x: hidden;          /* Prevent inner horizontal scroll */
 }
 
 /* Optional: fake notch for realism */
