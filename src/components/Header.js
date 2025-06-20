@@ -71,11 +71,11 @@ const Header = ({
         </button>
         <button
           onClick={toggleMobilePreview}
-          className={`p-2 text-gray-400 hover:text-blue-500 hover:bg-gray-800 rounded-lg ml-1 border-2 border-blue-400 ${mobilePreview ? 'bg-blue-950 text-blue-300' : ''}`}
-          title={mobilePreview ? 'Switch to Desktop View' : 'Switch to Mobile View'}
-          aria-label={mobilePreview ? 'Switch to Desktop View' : 'Switch to Mobile View'}
+          className={`p-1 rounded-lg ml-1 text-gray-400 hover:text-blue-500 hover:bg-gray-800/50 ${mobilePreview ? 'bg-blue-950 text-blue-300 border border-blue-400' : ''}`}
+          aria-label={mobilePreview ? 'Switch to desktop view' : 'Switch to mobile view'}
+          title={mobilePreview ? 'Desktop view' : 'Mobile view'}
         >
-          <Smartphone size={20} />
+          <Smartphone size={16} />
         </button>
       </div>
     </div>
