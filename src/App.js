@@ -297,87 +297,87 @@ const App = () => {
         );
     }
     
-  return (
-    <div className={`min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-gray-100 font-sans antialiased pt-14 px-2 sm:px-6 transition-all duration-200 ${mobilePreview ? 'mobile-preview' : ''}`}>
-      {mobilePreview && (
-        <button
-          onClick={toggleMobilePreview}
-          className="fixed top-2 right-2 z-30 bg-blue-600 text-white p-2 rounded-full shadow-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
-          title="Desktop view"
-          aria-label="Exit mobile preview and return to desktop view"
-        >
-          <Monitor size={20} />
-        </button>
-      )}
-      {/* Enhanced Header */}
-      <Header
-        showHeader={showHeader}
-        toggleSearchBar={toggleSearchBar}
-        toggleFilters={toggleFilters}
-        user={user}
-        handleLogin={handleLogin}
-        handleLogout={handleLogout}
-        setShowReviewForm={setShowReviewForm}
-        onBuyCredits={handleBuyCredits}
-        creditsBalance={creditsBalance}
-        language={language}
-        setLanguage={setLanguage}
-        mobilePreview={mobilePreview}
-        toggleMobilePreview={toggleMobilePreview}
-        GoogleIcon={GoogleIcon}
-      />
+    return (
+      <div className={`min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-gray-100 font-sans antialiased pt-14 px-2 sm:px-6 transition-all duration-200 ${mobilePreview ? 'mobile-preview' : ''}`}>
+        {mobilePreview && (
+          <button
+            onClick={toggleMobilePreview}
+            className="fixed top-2 right-2 z-30 bg-blue-600 text-white p-2 rounded-full shadow-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
+            title="Desktop view"
+            aria-label="Exit mobile preview and return to desktop view"
+          >
+            <Monitor size={20} />
+          </button>
+        )}
+        {/* Enhanced Header */}
+        <Header
+          showHeader={showHeader}
+          toggleSearchBar={toggleSearchBar}
+          toggleFilters={toggleFilters}
+          user={user}
+          handleLogin={handleLogin}
+          handleLogout={handleLogout}
+          setShowReviewForm={setShowReviewForm}
+          onBuyCredits={handleBuyCredits}
+          creditsBalance={creditsBalance}
+          language={language}
+          setLanguage={setLanguage}
+          mobilePreview={mobilePreview}
+          toggleMobilePreview={toggleMobilePreview}
+          GoogleIcon={GoogleIcon}
+        />
 
-      {showSearchBar && (
-        <div className="px-4 py-2">
-          <div className="relative">
-            <Search className="absolute left-3 top-2.5 text-gray-400" size={16} />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder={language === 'en' ? 'Search...' : 'ค้นหา...'}
-              className="w-full pl-8 pr-3 py-2 rounded-md bg-gray-800 placeholder-gray-500 text-sm focus:outline-none"
-            />
+        {showSearchBar && (
+          <div className="px-4 py-2">
+            <div className="relative">
+              <Search className="absolute left-3 top-2.5 text-gray-400" size={16} />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder={language === 'en' ? 'Search...' : 'ค้นหา...'}
+                className="w-full pl-8 pr-3 py-2 rounded-md bg-gray-800 placeholder-gray-500 text-sm focus:outline-none"
+              />
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {showFilters && (
-        <FilterBar onFilterChange={handleFilterChange} language={language} />
-      )}
+        {showFilters && (
+          <FilterBar onFilterChange={handleFilterChange} language={language} />
+        )}
 
-      {/* Main Content */}
-      <ItemList
-        filteredReviews={filteredReviews}
-        isAuthReady={isAuthReady}
-        handleItemClick={handleItemClick}
-        language={language}
-        categories={categories}
-        citiesData={citiesData}
-        bangkokStreetsData={bangkokStreetsData}
-        generatedImages={generatedImages}
-        setGeneratedImages={setGeneratedImages}
-        isLoadingNoMatchingReviewsMessage={isLoadingNoMatchingReviewsMessage}
-        noMatchingReviewsMessage={noMatchingReviewsMessage}
-        generateImage={generateImage}
-      />
-
-      {/* Modal */}
-      {showReviewForm && (
-        <ReviewFormModal
-          show={showReviewForm}
-          onClose={() => setShowReviewForm(false)}
-          newReview={newReview}
-          setNewReview={setNewReview}
-          onSubmit={handleSubmitReview}
+        {/* Main Content */}
+        <ItemList
+          filteredReviews={filteredReviews}
+          isAuthReady={isAuthReady}
+          handleItemClick={handleItemClick}
+          language={language}
           categories={categories}
           citiesData={citiesData}
           bangkokStreetsData={bangkokStreetsData}
-          language={language}
+          generatedImages={generatedImages}
+          setGeneratedImages={setGeneratedImages}
+          isLoadingNoMatchingReviewsMessage={isLoadingNoMatchingReviewsMessage}
+          noMatchingReviewsMessage={noMatchingReviewsMessage}
+          generateImage={generateImage}
         />
-      )}
-    </div>
-  );
+
+        {/* Modal */}
+        {showReviewForm && (
+          <ReviewFormModal
+            show={showReviewForm}
+            onClose={() => setShowReviewForm(false)}
+            newReview={newReview}
+            setNewReview={setNewReview}
+            onSubmit={handleSubmitReview}
+            categories={categories}
+            citiesData={citiesData}
+            bangkokStreetsData={bangkokStreetsData}
+            language={language}
+          />
+        )}
+      </div>
+    );
 
 };
 
