@@ -14,7 +14,11 @@ app.use((req, res, next) => {
 });
 app.use(express.json());
 
-const stripe = Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_placeholder');
+const stripeSecret = process.env.STRIPE_SECRET_KEY || 'sk_test_placeholder';
+if (stripeSecret === 'sk_test_placeholder') {
+  console.warn('Warning: using placeholder Stripe secret key. Set STRIPE_SECRET_KEY in your environment.');
+}
+const stripe = Stripe(stripeSecret);
 
 app.post('/create-checkout-session', async (req, res) => {
   const { amount } = req.body;

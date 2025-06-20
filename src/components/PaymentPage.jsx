@@ -20,23 +20,34 @@ const PaymentPage = ({ onBack, onComplete }) => {
   const [completed, setCompleted] = useState(false);
   // control visibility of PromptPay QR modal
   const [showQRModal, setShowQRModal] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   // hardcoded PromptPay recipient info
   const PROMPTPAY_ID = '0812345678';
   const PROMPTPAY_ACCOUNT = 'Demo Shop';
 
   const handleStripeCheckout = async () => {
+    setLoading(true);
+    setError(null);
     try {
       const res = await fetch(`${API_BASE}/create-checkout-session`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ amount: credits }),
       });
+      if (!res.ok) {
+        throw new Error('Failed to create Stripe session');
+      }
       const data = await res.json();
       const stripe = await stripePromise;
-      await stripe.redirectToCheckout({ sessionId: data.id });
+      const { error } = await stripe.redirectToCheckout({ sessionId: data.id });
+      if (error) throw error;
     } catch (err) {
       console.error('Stripe checkout error', err);
+      setError('Unable to start Stripe Checkout.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -99,10 +110,12 @@ const PaymentPage = ({ onBack, onComplete }) => {
             <div className="space-y-2">
               <button
                 onClick={handleStripeCheckout}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
+                disabled={loading}
+                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded disabled:opacity-50"
               >
-                Pay with Card
+                {loading ? 'Processing...' : 'Pay with Card'}
               </button>
+              {error && <p className="text-red-400 text-sm">{error}</p>}
             </div>
           )}
         {method === 'paypal' && (
