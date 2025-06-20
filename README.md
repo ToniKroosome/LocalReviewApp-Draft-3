@@ -13,12 +13,3 @@ A minimal Express server is provided in `server/index.js` to create Stripe Check
 ```bash
 npm install
 node server/index.js
-```
-
-Set `STRIPE_SECRET_KEY` in your environment with your Stripe test secret key. The frontend expects the server at `http://localhost:4242`.
- 
-# LocalReviewApp-Draft-3
-
-## Generating PromptPay QR Codes
-
-Visit `/pay?recipient=YOUR_ID&amount=100.50` while the server is running to see the QR code.
