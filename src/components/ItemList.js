@@ -20,7 +20,7 @@ const ItemList = ({
   const [showImages, setShowImages] = useState(false);
 
   return (
-    <main className="main-content px-1 py-4 sm:max-w-7xl sm:mx-auto sm:px-4 sm:py-8">
+    <main className="main-content px-1 py-4 sm:px-4 sm:py-8">
       <div className="flex justify-end mb-2">
         <button
           type="button"
