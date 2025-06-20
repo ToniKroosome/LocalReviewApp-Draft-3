@@ -20,7 +20,7 @@ const Header = ({
     style={{ minHeight: '32px', padding: '0.15rem 0' }}
   >
     <div className="absolute top-0 left-1 text-[10px] text-gray-400 pointer-events-none">
-      version 2.3
+      version 2.4
     </div>
     <div className="max-w-4xl mx-auto flex items-center justify-between px-3 py-0.5 gap-2">
       <div className="flex items-center gap-2">
