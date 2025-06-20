@@ -30,7 +30,7 @@ const Header = ({
         <h1 className="text-base font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400 tracking-tight">
           ReviewAnything
         </h1>
-        <span className="text-xs text-gray-400 ml-1">version 2.3</span>
+        <span className="text-xs text-gray-400 ml-1">version 2.4</span>
       </div>
       <div className="flex items-center gap-1">
         <button onClick={toggleSearchBar} className="p-1 text-gray-400 hover:text-gray-100 hover:bg-gray-800/50 rounded-lg" title="Search">
