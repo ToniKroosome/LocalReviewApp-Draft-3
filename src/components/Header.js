@@ -76,8 +76,9 @@ const Header = ({
           onClick={toggleMobilePreview}
           className={`p-1 text-gray-400 hover:text-gray-100 hover:bg-gray-800/50 rounded-lg ml-1 ${mobilePreview ? 'text-blue-400' : ''}`}
           title="Mobile preview"
+          aria-label="Toggle mobile preview"
         >
-          <Smartphone size={14} />
+          <Smartphone size={16} />
         </button>
       </div>
     </div>
