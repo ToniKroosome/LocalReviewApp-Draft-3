@@ -10,36 +10,109 @@
 body {
   @apply m-0 bg-gray-950 text-gray-100 font-sans;
   font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+  background: linear-gradient(135deg, #23272f 0%, #18181b 100%);
 }
 
 /* Main content should take full width for responsive layouts */
 .main-content {
   width: 100%;
-  max-width: none;
+  max-width: 100%;
   margin: 0;
   padding: 0;
 }
 
-/* Simulated phone frame for mobile preview */
+/* Simulated mobile device frame */
 .mobile-preview {
-  width: 100%;
-  /* Constrain to typical phone size */
   max-width: 390px;
-  margin: 0 auto;
-  border: 8px solid #222;
-  border-radius: 1.5rem;
-  box-sizing: border-box;
-  box-shadow: 0 0 40px 0 #000a;
-  /* Allow scrolling so content never gets cut off */
-  overflow-x: auto;
+  max-height: 844px;
+  height: 90vh;
+  margin: 32px auto;
+  border: 4px solid #222;
+  border-radius: 1.25rem;
   overflow-y: auto;
+  overflow-x: hidden;
+  box-shadow: 0 0 40px 0 #000a;
   background: #18181b;
+  box-sizing: border-box;
   position: relative;
+  display: flex;
+  flex-direction: column;
+
+  scrollbar-width: thin;           /* Firefox */
+  scrollbar-color: #222 #18181b;   /* thumb color, track color */
+  -ms-overflow-style: none;        /* IE and Edge */
+}
+
+/* Custom scrollbar for Chrome, Safari, Opera */
+.mobile-preview::-webkit-scrollbar {
+  width: 8px;
+  background: #18181b;             /* Track color */
+}
+.mobile-preview::-webkit-scrollbar-thumb {
+  background: #222;                /* Thumb color */
+  border-radius: 8px;
+}
+.mobile-preview::-webkit-scrollbar-corner {
+  background: #18181b;
+}
+
+/* Add device padding */
+.mobile-preview .main-content,
+.mobile-preview .content {
+  padding: 12px 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  box-sizing: border-box;
+  overflow-x: hidden;          /* Prevent inner horizontal scroll */
+}
+
+/* Fix grid width so it never overflows frame */
+.mobile-preview .grid {
+  grid-template-columns: 1fr !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  box-sizing: border-box;
+  overflow-x: hidden;          /* Prevent inner horizontal scroll */
+}
+
+/* Optional: fake notch for realism */
+.mobile-preview::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 8px;
+  border-radius: 4px;
+  background: #222;
+  opacity: 0.5;
+  z-index: 10;
 }
 
 .mobile-preview button,
 .mobile-preview input,
 .mobile-preview select {
-  min-height: 44px;
+  min-height: 48px;
+  font-size: 1.1rem;
+  border-radius: 0.75rem;
+  touch-action: manipulation;
 }
 
+.mobile-preview .card,
+.mobile-preview .item-list-card {
+  background: #23272f;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 16px 0 #0004;
+  padding: 1.25rem 1rem;
+  width: 100%;
+  max-width: none;
+}
+
+.mobile-preview .header {
+  padding: 1rem 1.5rem;
+}

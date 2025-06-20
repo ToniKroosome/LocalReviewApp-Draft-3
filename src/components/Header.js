@@ -15,7 +15,6 @@ const Header = ({
   setLanguage,
   mobilePreview,
   toggleMobilePreview,
-  
   GoogleIcon,
 }) => (
   <header

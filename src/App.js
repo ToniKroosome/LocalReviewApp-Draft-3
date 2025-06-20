@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Star, Camera, CheckCircle, User, TrendingUp, Calendar, Filter, Plus, X, ChevronDown, LogOut, Sparkles, MapPin, Globe, Heart, MessageCircle, Award, Clock, ArrowLeft, Monitor } from 'lucide-react';
+import { Search, Star, Camera, CheckCircle, User, TrendingUp, Calendar, Filter, Plus, X, ChevronDown, LogOut, Sparkles, MapPin, Globe, Heart, MessageCircle, Award, Clock, ArrowLeft, Smartphone, Monitor } from 'lucide-react';
 import { initialSampleReviews } from './data/sampleReviews';
 import Header from './components/Header';
 import ItemList from './components/ItemList';
@@ -20,16 +20,14 @@ import { bangkokStreetsData } from "./data/bangkokStreetsData";
 
 initScrollbarStyles();
 
-
-// Main App Component with enhanced design
 const App = () => {
     const [page, setPage] = useState('home'); // 'home', 'detail', 'payment'
-    const [selectedItem, setSelectedItem] = useState(null);
-    const [searchQuery, setSearchQuery] = useState('');
+    const [selectedItem, setSelectedItem] = useState(null);
+    const [searchQuery, setSearchQuery] = useState('');
     const [language, setLanguage] = useState(() => localStorage.getItem('language') || 'en');
-    const [selectedMainCategory, setSelectedMainCategory] = useState('all');
-    const [selectedCategory, setSelectedCategory] = useState('all');
-    const [selectedSubCategory, setSelectedSubCategory] = useState('all');
+    const [selectedMainCategory, setSelectedMainCategory] = useState('all');
+    const [selectedCategory, setSelectedCategory] = useState('all');
+    const [selectedSubCategory, setSelectedSubCategory] = useState('all');
     const [selectedFilters, setSelectedFilters] = useState({
         category: 'All Categories',
         shopType: '',
@@ -41,25 +39,25 @@ const App = () => {
         street: '',
         alley: ''
     });
-    const [showReviewForm, setShowReviewForm] = useState(false);
-    const [reviews, setReviews] = useState([]);
-    const [user, setUser] = useState(null); // Changed from userId to user object
-    const [isAuthReady, setIsAuthReady] = useState(false);
-    const [noMatchingReviewsMessage, setNoMatchingReviewsMessage] = useState('');
-    const [isLoadingNoMatchingReviewsMessage, setIsLoadingNoMatchingReviewsMessage] = useState(false);
-    const [generatedImages, setGeneratedImages] = useState({}); // State for dynamically generated images
+    const [showReviewForm, setShowReviewForm] = useState(false);
+    const [reviews, setReviews] = useState([]);
+    const [user, setUser] = useState(null);
+    const [isAuthReady, setIsAuthReady] = useState(false);
+    const [noMatchingReviewsMessage, setNoMatchingReviewsMessage] = useState('');
+    const [isLoadingNoMatchingReviewsMessage, setIsLoadingNoMatchingReviewsMessage] = useState(false);
+    const [generatedImages, setGeneratedImages] = useState({});
     const [creditsBalance, setCreditsBalance] = useState(0);
-    // Visibility states for search and filter UI controlled by Header buttons
     const [showSearchBar, setShowSearchBar] = useState(false);
     const [showFilters, setShowFilters] = useState(false);
     const [mobilePreview, setMobilePreview] = useState(false);
+
+    const toggleMobilePreview = () => setMobilePreview(v => !v);
 
     useEffect(() => {
         localStorage.setItem('language', language);
     }, [language]);
     const toggleSearchBar = () => setShowSearchBar(v => !v);
     const toggleFilters = () => setShowFilters(v => !v);
-    const toggleMobilePreview = () => setMobilePreview(v => !v);
 
     const [showHeader, setShowHeader] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(window.scrollY);
@@ -79,17 +77,17 @@ const App = () => {
         setSelectedFilters(filters);
     };
 
-    const [newReview, setNewReview] = useState({
-        itemName: '',
-        mainCategory: '',   
-        category: '',   
-        subCategory: '',    
-        location: { city: '', district: '', zone: '', subDistrict: '', street: '', alley: '', specificArea: '' },
-        rating: 5,
-        comment: '',
-        author: ''
-    });
-    // Multi-criteria filtering block
+    const [newReview, setNewReview] = useState({
+        itemName: '',
+        mainCategory: '',
+        category: '',
+        subCategory: '',
+        location: { city: '', district: '', zone: '', subDistrict: '', street: '', alley: '', specificArea: '' },
+        rating: 5,
+        comment: '',
+        author: ''
+    });
+
     const filteredReviews = reviews.filter((item) => {
         const qTrim = searchQuery.trim();
         const qLower = qTrim.toLowerCase();
@@ -136,31 +134,31 @@ const App = () => {
         return matchesSearch && matchesMainCategory && matchesCategory && matchesSubCategory &&
             matchesCategoryBar && matchesCity && matchesDistrict && matchesZone && matchesSubDistrict && matchesStreet && matchesAlley && matchesShopType && matchesOnlineType;
     });
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
-            setUser(user);
-            setIsAuthReady(true);
-        });
-        return () => unsubscribe();
-    }, []);
 
-    useEffect(() => {
-        if (isAuthReady) {
-            setReviews(initialSampleReviews);
-        }
-    }, [isAuthReady]);
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            setUser(user);
+            setIsAuthReady(true);
+        });
+        return () => unsubscribe();
+    }, []);
 
-    // Update newReview author when user logs in
-    useEffect(() => {
-        if (user) {
-            setNewReview(prev => ({ ...prev, author: user.displayName || '' }));
-        }
-    }, [user]);
+    useEffect(() => {
+        if (isAuthReady) {
+            setReviews(initialSampleReviews);
+        }
+    }, [isAuthReady]);
 
-    const handleItemClick = (item) => {
-        setSelectedItem(item);
-        setPage('detail');
-    };
+    useEffect(() => {
+        if (user) {
+            setNewReview(prev => ({ ...prev, author: user.displayName || '' }));
+        }
+    }, [user]);
+
+    const handleItemClick = (item) => {
+        setSelectedItem(item);
+        setPage('detail');
+    };
 
     const handleBack = () => {
         setSelectedItem(null);
@@ -175,108 +173,105 @@ const App = () => {
         setCreditsBalance(b => b + amount);
         setPage('home');
     };
-      
-    const handleLogin = async () => {
-        try {
-            const { user: loggedInUser } = await signIn();
-            setUser(loggedInUser);
-        } catch (error) {
-            console.error("Error signing in with Google:", error);
-        }
-    };
 
-    const handleLogout = async () => {
-        await signOut();
-        setUser(null);
-        setPage('home'); // Go to home page on logout
-    };
-    
-    const handleSubmitReview = (newReviewData) => {
-        if (!user) {
-            console.log(language === 'en' ? 'You must be logged in to submit a review.' : 'คุณต้องเข้าสู่ระบบเพื่อส่งรีวิว');
-            alert(language === 'en' ? 'Please sign in to write a review.' : 'กรุณาเข้าสู่ระบบเพื่อเขียนรีวิว');
-            return;
-        }
-        if (!newReviewData.itemName.trim() || !newReviewData.mainCategory || !newReviewData.category || !newReviewData.comment.trim() || !newReviewData.author.trim()) {
-            console.log(language === 'en' ? 'Please fill in all required fields (Item Name, Main Category, Category, Your Review, Your Name).' : 'กรุณากรอกข้อมูลที่จำเป็นทั้งหมด (ชื่อรายการ, หมวดหมู่หลัก, หมวดหมู่, รีวิวของคุณ, ชื่อของคุณ)');
-            return;
-        }
+    const handleLogin = async () => {
+        try {
+            const { user: loggedInUser } = await signIn();
+            setUser(loggedInUser);
+        } catch (error) {
+            console.error("Error signing in with Google:", error);
+        }
+    };
 
-        const reviewToAdd = {
-            id: Date.now(),
-            author: newReviewData.author.trim(),
-            rating: newReviewData.rating,
-            date: new Date().toISOString().split('T')[0],
-            comment: newReviewData.comment.trim(),
-            comment_th: newReviewData.comment_th ? newReviewData.comment_th.trim() : '',
-            verified: true, // Mark as verified since user is logged in
-            helpful: 0,
-            authorId: user.uid, // Add author's ID
-            authorPhotoURL: user.photoURL // Add author's photo
-        };
+    const handleLogout = async () => {
+        await signOut();
+        setUser(null);
+        setPage('home');
+    };
 
-        const existingItemIndex = reviews.findIndex(item => 
-            item.itemName.toLowerCase() === newReviewData.itemName.toLowerCase().trim() &&
-            item.mainCategory === newReviewData.mainCategory &&
-            item.category === newReviewData.category &&
-            item.subCategory === newReviewData.subCategory
-        );
+    const handleSubmitReview = (newReviewData) => {
+        if (!user) {
+            alert(language === 'en' ? 'Please sign in to write a review.' : 'กรุณาเข้าสู่ระบบเพื่อเขียนรีวิว');
+            return;
+        }
+        if (!newReviewData.itemName.trim() || !newReviewData.mainCategory || !newReviewData.category || !newReviewData.comment.trim() || !newReviewData.author.trim()) {
+            console.log(language === 'en' ? 'Please fill in all required fields (Item Name, Main Category, Category, Your Review, Your Name).' : 'กรุณากรอกข้อมูลที่จำเป็นทั้งหมด (ชื่อรายการ, หมวดหมู่หลัก, หมวดหมู่, รีวิวของคุณ, ชื่อของคุณ)');
+            return;
+        }
 
-        let updatedReviews = [...reviews];
-        let updatedItem;
+        const reviewToAdd = {
+            id: Date.now(),
+            author: newReviewData.author.trim(),
+            rating: newReviewData.rating,
+            date: new Date().toISOString().split('T')[0],
+            comment: newReviewData.comment.trim(),
+            comment_th: newReviewData.comment_th ? newReviewData.comment_th.trim() : '',
+            verified: true,
+            helpful: 0,
+            authorId: user.uid,
+            authorPhotoURL: user.photoURL
+        };
 
-        if (existingItemIndex > -1) {
-            const itemToUpdate = { ...updatedReviews[existingItemIndex] };
-            const newReviewCount = itemToUpdate.reviewCount + 1;
-            const oldTotalRating = itemToUpdate.rating * itemToUpdate.reviewCount;
-            itemToUpdate.rating = (oldTotalRating + newReviewData.rating) / newReviewCount;
-            itemToUpdate.reviewCount = newReviewCount;
-            itemToUpdate.reviews = [reviewToAdd, ...itemToUpdate.reviews];
-            updatedReviews[existingItemIndex] = itemToUpdate;
-            updatedItem = itemToUpdate;
-            console.log(language === 'en' ? 'Review added to existing item!' : 'เพิ่มรีวิวในรายการที่มีอยู่แล้ว!');
-        } else {
-            const newItem = {
-                id: `new-item-${Date.now()}`,
-                itemName: newReviewData.itemName.trim(),
-                mainCategory: newReviewData.mainCategory,
-                category: newReviewData.category,
-                subCategory: newReviewData.subCategory,
-                location: newReviewData.location,
-                rating: newReviewData.rating,
-                reviewCount: 1,
-                reviews: [reviewToAdd]
-            };
-            updatedReviews = [newItem, ...updatedReviews];
-            updatedItem = newItem;
-            console.log(language === 'en' ? 'New item and review submitted!' : 'ส่งรายการใหม่และรีวิวแล้ว!');
-        }
-        
-        setReviews(updatedReviews);
-        setShowReviewForm(false);
-        setNewReview({
-            itemName: '', mainCategory: '', category: '', subCategory: '', 
-            location: { city: '', district: '', zone: '', subDistrict: '', street: '', alley: '', specificArea: '' },
-            rating: 5, comment: '', author: user.displayName || ''
-        });
-        
-        if (page === 'detail') {
-            setSelectedItem(updatedItem);
-        }
-    };
+        const existingItemIndex = reviews.findIndex(item =>
+            item.itemName.toLowerCase() === newReviewData.itemName.toLowerCase().trim() &&
+            item.mainCategory === newReviewData.mainCategory &&
+            item.category === newReviewData.category &&
+            item.subCategory === newReviewData.subCategory
+        );
 
-    useEffect(() => {
-        if (filteredReviews.length === 0 && isAuthReady && page === 'home') {
-            setIsLoadingNoMatchingReviewsMessage(true);
-            setTimeout(() => {
-                const message = language === 'en' 
-                    ? `No reviews match your filters. Be the first to add one!`
-                    : `ไม่พบรีวิวที่ตรงกับเกณฑ์ของคุณ เป็นคนแรกที่เพิ่มรีวิว!`;
-                setNoMatchingReviewsMessage(message);
-                setIsLoadingNoMatchingReviewsMessage(false);
-            }, 300);
-        }
-    }, [filteredReviews.length, isAuthReady, language, page]);
+        let updatedReviews = [...reviews];
+        let updatedItem;
+
+        if (existingItemIndex > -1) {
+            const itemToUpdate = { ...updatedReviews[existingItemIndex] };
+            const newReviewCount = itemToUpdate.reviewCount + 1;
+            const oldTotalRating = itemToUpdate.rating * itemToUpdate.reviewCount;
+            itemToUpdate.rating = (oldTotalRating + newReviewData.rating) / newReviewCount;
+            itemToUpdate.reviewCount = newReviewCount;
+            itemToUpdate.reviews = [reviewToAdd, ...itemToUpdate.reviews];
+            updatedReviews[existingItemIndex] = itemToUpdate;
+            updatedItem = itemToUpdate;
+        } else {
+            const newItem = {
+                id: `new-item-${Date.now()}`,
+                itemName: newReviewData.itemName.trim(),
+                mainCategory: newReviewData.mainCategory,
+                category: newReviewData.category,
+                subCategory: newReviewData.subCategory,
+                location: newReviewData.location,
+                rating: newReviewData.rating,
+                reviewCount: 1,
+                reviews: [reviewToAdd]
+            };
+            updatedReviews = [newItem, ...updatedReviews];
+            updatedItem = newItem;
+        }
+
+        setReviews(updatedReviews);
+        setShowReviewForm(false);
+        setNewReview({
+            itemName: '', mainCategory: '', category: '', subCategory: '',
+            location: { city: '', district: '', zone: '', subDistrict: '', street: '', alley: '', specificArea: '' },
+            rating: 5, comment: '', author: user.displayName || ''
+        });
+
+        if (page === 'detail') {
+            setSelectedItem(updatedItem);
+        }
+    };
+
+    useEffect(() => {
+        if (filteredReviews.length === 0 && isAuthReady && page === 'home') {
+            setIsLoadingNoMatchingReviewsMessage(true);
+            setTimeout(() => {
+                const message = language === 'en'
+                    ? `No reviews match your filters. Be the first to add one!`
+                    : `ไม่พบรีวิวที่ตรงกับเกณฑ์ของคุณ เป็นคนแรกที่เพิ่มรีวิว!`;
+                setNoMatchingReviewsMessage(message);
+                setIsLoadingNoMatchingReviewsMessage(false);
+            }, 300);
+        }
+    }, [filteredReviews.length, isAuthReady, language, page]);
 
     if (page === 'payment') {
         return <PaymentPage onBack={handleBack} onComplete={handlePaymentComplete} />;
@@ -296,89 +291,94 @@ const App = () => {
             />
         );
     }
-    
-  return (
-  <div className={`min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-gray-100 font-sans antialiased pt-14 px-2 sm:px-6 transition-all duration-200 ${mobilePreview ? 'mobile-preview' : ''}`}>
-    {/* Enhanced Header */}
-    <Header
-      showHeader={showHeader}
-      toggleSearchBar={toggleSearchBar}
-      toggleFilters={toggleFilters}
-      user={user}
-      handleLogin={handleLogin}
-      handleLogout={handleLogout}
-      setShowReviewForm={setShowReviewForm}
-      onBuyCredits={handleBuyCredits}
-      creditsBalance={creditsBalance}
-      language={language}
-      setLanguage={setLanguage}
-      mobilePreview={mobilePreview}
-      toggleMobilePreview={toggleMobilePreview}
-      GoogleIcon={GoogleIcon}
-    />
 
-    {mobilePreview && (
-      <button
-        onClick={toggleMobilePreview}
-        className="absolute top-2 right-2 z-30 bg-blue-600 text-white p-2 rounded-full shadow-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
-        title="Desktop view"
-        aria-label="Exit mobile preview and return to desktop view"
-      >
-        <Monitor size={20} />
-      </button>
-    )}
+    // ---- MINIMAL EDIT TO PREVENT HORIZONTAL SCROLLBAR IN MOBILE PREVIEW ----
+    // Add style={{ overflowX: mobilePreview ? 'hidden' : undefined }} to the main wrapper div
 
-      {showSearchBar && (
-        <div className="px-4 py-2">
-          <div className="relative">
-            <Search className="absolute left-3 top-2.5 text-gray-400" size={16} />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder={language === 'en' ? 'Search...' : 'ค้นหา...'}
-              className="w-full pl-8 pr-3 py-2 rounded-md bg-gray-800 placeholder-gray-500 text-sm focus:outline-none"
+    return (
+        <div
+            className={`min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-gray-100 font-sans antialiased pt-14 px-2 sm:px-6 transition-all duration-200 ${mobilePreview ? 'mobile-preview' : ''}`}
+            style={mobilePreview ? { overflowX: 'hidden' } : undefined}
+        >
+            {mobilePreview && (
+                <button
+                    onClick={toggleMobilePreview}
+                    className="fixed top-2 right-2 z-30 bg-blue-600 text-white p-2 rounded-full shadow-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                    title="Desktop view"
+                    aria-label="Exit mobile preview and return to desktop view"
+                >
+                    <Monitor size={20} />
+                </button>
+            )}
+            {/* Enhanced Header */}
+            <Header
+                showHeader={showHeader}
+                toggleSearchBar={toggleSearchBar}
+                toggleFilters={toggleFilters}
+                user={user}
+                handleLogin={handleLogin}
+                handleLogout={handleLogout}
+                setShowReviewForm={setShowReviewForm}
+                onBuyCredits={handleBuyCredits}
+                creditsBalance={creditsBalance}
+                language={language}
+                setLanguage={setLanguage}
+                mobilePreview={mobilePreview}
+                toggleMobilePreview={toggleMobilePreview}
+                GoogleIcon={GoogleIcon}
             />
-          </div>
+
+            {showSearchBar && (
+                <div className="px-4 py-2">
+                    <div className="relative">
+                        <Search className="absolute left-3 top-2.5 text-gray-400" size={16} />
+                        <input
+                            type="text"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            placeholder={language === 'en' ? 'Search...' : 'ค้นหา...'}
+                            className="w-full pl-8 pr-3 py-2 rounded-md bg-gray-800 placeholder-gray-500 text-sm focus:outline-none"
+                        />
+                    </div>
+                </div>
+            )}
+
+            {showFilters && (
+                <FilterBar onFilterChange={handleFilterChange} language={language} />
+            )}
+
+            {/* Main Content */}
+            <ItemList
+                filteredReviews={filteredReviews}
+                isAuthReady={isAuthReady}
+                handleItemClick={handleItemClick}
+                language={language}
+                categories={categories}
+                citiesData={citiesData}
+                bangkokStreetsData={bangkokStreetsData}
+                generatedImages={generatedImages}
+                setGeneratedImages={setGeneratedImages}
+                isLoadingNoMatchingReviewsMessage={isLoadingNoMatchingReviewsMessage}
+                noMatchingReviewsMessage={noMatchingReviewsMessage}
+                generateImage={generateImage}
+            />
+
+            {/* Modal */}
+            {showReviewForm && (
+                <ReviewFormModal
+                    show={showReviewForm}
+                    onClose={() => setShowReviewForm(false)}
+                    newReview={newReview}
+                    setNewReview={setNewReview}
+                    onSubmit={handleSubmitReview}
+                    categories={categories}
+                    citiesData={citiesData}
+                    bangkokStreetsData={bangkokStreetsData}
+                    language={language}
+                />
+            )}
         </div>
-      )}
-
-      {showFilters && (
-        <FilterBar onFilterChange={handleFilterChange} language={language} />
-      )}
-
-    {/* Main Content */}
-    <ItemList
-      filteredReviews={filteredReviews}
-      isAuthReady={isAuthReady}
-      handleItemClick={handleItemClick}
-      language={language}
-      categories={categories}
-      citiesData={citiesData}
-      bangkokStreetsData={bangkokStreetsData}
-      generatedImages={generatedImages}
-      setGeneratedImages={setGeneratedImages}
-      isLoadingNoMatchingReviewsMessage={isLoadingNoMatchingReviewsMessage}
-      noMatchingReviewsMessage={noMatchingReviewsMessage}
-      generateImage={generateImage}
-    />
-
-    {/* Modal */}
-    {showReviewForm && (
-      <ReviewFormModal
-        show={showReviewForm}
-        onClose={() => setShowReviewForm(false)}
-        newReview={newReview}
-        setNewReview={setNewReview}
-        onSubmit={handleSubmitReview}
-        categories={categories}
-        citiesData={citiesData}
-        bangkokStreetsData={bangkokStreetsData}
-        language={language}
-      />
-    )}
-  </div>
-);
+    );
 
 };
 
