@@ -8,7 +8,7 @@ const CompactReviewCard = ({ item, onDetails, language = 'en' }) => {
   const avatarLetter = review ? review.author.charAt(0).toUpperCase() : '';
 
   return (
-    <div className="compact-review-card">
+    <div className="compact-review-card item-list-card">
       <div className="crc-header">
         <h3 className="crc-title">{language === 'th' && item.itemName_th ? item.itemName_th : item.itemName}</h3>
       </div>

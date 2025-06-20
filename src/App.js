@@ -298,11 +298,11 @@ const App = () => {
     }
     
   return (
-    <div className={`min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-gray-100 font-sans antialiased pt-12 ${mobilePreview ? 'mobile-preview' : ''}`}> 
+    <div className={`min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-gray-100 font-sans antialiased pt-14 px-2 sm:px-6 transition-all duration-200 ${mobilePreview ? 'mobile-preview' : ''}`}>
       {mobilePreview && (
         <button
           onClick={toggleMobilePreview}
-          className="fixed top-2 right-2 z-30 bg-blue-600 text-white p-2 rounded-full shadow hover:bg-blue-500"
+          className="fixed top-2 right-2 z-30 bg-blue-600 text-white p-2 rounded-full shadow-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
           title="Desktop view"
           aria-label="Exit mobile preview and return to desktop view"
         >
