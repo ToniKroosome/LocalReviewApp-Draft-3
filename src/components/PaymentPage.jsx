@@ -2,17 +2,32 @@ import React, { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { loadStripe } from '@stripe/stripe-js';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
+import PromptPayQRModal from './PromptPayQRModal';
 
-const stripePromise = loadStripe('pk_test_placeholder');
+// Load Stripe using publishable key from environment. Falls back to a placeholder
+// key if not provided so the button can still render in dev.
+const stripePromise = loadStripe(
+  process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY || 'pk_test_placeholder'
+);
+
+// Base URL for the backend server handling Stripe Checkout
+const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:4242';
 
 const PaymentPage = ({ onBack, onComplete }) => {
   const [credits, setCredits] = useState(10);
-  const [method, setMethod] = useState('stripe'); // 'stripe', 'paypal'
+  // selected payment method: stripe, paypal or promptpay
+  const [method, setMethod] = useState('stripe');
   const [completed, setCompleted] = useState(false);
+  // control visibility of PromptPay QR modal
+  const [showQRModal, setShowQRModal] = useState(false);
+
+  // hardcoded PromptPay recipient info
+  const PROMPTPAY_ID = '0812345678';
+  const PROMPTPAY_ACCOUNT = 'Demo Shop';
 
   const handleStripeCheckout = async () => {
     try {
-      const res = await fetch('/create-checkout-session', {
+      const res = await fetch(`${API_BASE}/create-checkout-session`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ amount: credits }),
@@ -52,12 +67,31 @@ const PaymentPage = ({ onBack, onComplete }) => {
             <label className="block text-sm font-medium mb-1">Payment Method</label>
             <div className="flex gap-4">
               <label className="flex items-center gap-1">
-                <input type="radio" value="stripe" checked={method==='stripe'} onChange={() => setMethod('stripe')} />
+                <input
+                  type="radio"
+                  value="stripe"
+                  checked={method === 'stripe'}
+                  onChange={() => setMethod('stripe')}
+                />
                 Stripe
               </label>
               <label className="flex items-center gap-1">
-                <input type="radio" value="paypal" checked={method==='paypal'} onChange={() => setMethod('paypal')} />
+                <input
+                  type="radio"
+                  value="paypal"
+                  checked={method === 'paypal'}
+                  onChange={() => setMethod('paypal')}
+                />
                 PayPal
+              </label>
+              <label className="flex items-center gap-1">
+                <input
+                  type="radio"
+                  value="promptpay"
+                  checked={method === 'promptpay'}
+                  onChange={() => setMethod('promptpay')}
+                />
+                PromptPay
               </label>
             </div>
           </div>
@@ -91,6 +125,31 @@ const PaymentPage = ({ onBack, onComplete }) => {
             </PayPalScriptProvider>
           </div>
         )}
+
+        {/* When PromptPay is chosen, open a modal showing the QR code */}
+        {method === 'promptpay' && (
+          <div className="space-y-2">
+            <button
+              onClick={() => setShowQRModal(true)}
+              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
+            >
+              Pay with PromptPay
+            </button>
+          </div>
+        )}
+
+        <PromptPayQRModal
+          open={showQRModal}
+          onClose={() => setShowQRModal(false)}
+          promptPayId={PROMPTPAY_ID}
+          accountName={PROMPTPAY_ACCOUNT}
+          amount={credits}
+          onComplete={() => {
+            setShowQRModal(false);
+            setCompleted(true);
+            if (onComplete) onComplete(credits);
+          }}
+        />
 
 
 
