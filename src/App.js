@@ -292,8 +292,7 @@ const App = () => {
         );
     }
 
-    // ---- MINIMAL EDIT TO PREVENT HORIZONTAL SCROLLBAR IN MOBILE PREVIEW ----
-    // Add style={{ overflowX: mobilePreview ? 'hidden' : undefined }} to the main wrapper div
+    // ---- HORIZONTAL SCROLL EXAMPLE SECTION ADDED BELOW ----
 
     return (
         <div
@@ -327,6 +326,17 @@ const App = () => {
                 toggleMobilePreview={toggleMobilePreview}
                 GoogleIcon={GoogleIcon}
             />
+
+            {/* Horizontal Scroll Example Section */}
+            <div className="my-6">
+                <h2 className="mb-2 font-semibold text-lg">Horizontal Scroll Example</h2>
+                <div className="horizontal-scroll pb-2">
+                    <div style={{ width: 320, height: 120, background: "#334", marginRight: 12, borderRadius: 8, display: 'inline-block', color: '#fff', lineHeight: '120px', textAlign: 'center' }}>Item 1</div>
+                    <div style={{ width: 320, height: 120, background: "#556", marginRight: 12, borderRadius: 8, display: 'inline-block', color: '#fff', lineHeight: '120px', textAlign: 'center' }}>Item 2</div>
+                    <div style={{ width: 320, height: 120, background: "#778", marginRight: 12, borderRadius: 8, display: 'inline-block', color: '#fff', lineHeight: '120px', textAlign: 'center' }}>Item 3</div>
+                    <div style={{ width: 320, height: 120, background: "#399", marginRight: 12, borderRadius: 8, display: 'inline-block', color: '#fff', lineHeight: '120px', textAlign: 'center' }}>Item 4</div>
+                </div>
+            </div>
 
             {showSearchBar && (
                 <div className="px-4 py-2">
