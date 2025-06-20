@@ -6,15 +6,12 @@
   --card-bg: #1f2937;
 }
 
-/* Global body styles for consistent layout */
 body {
   @apply m-0 bg-gray-950 text-gray-100 font-sans;
   font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
-  /* Improved background for device preview realism */
   background: linear-gradient(135deg, #23272f 0%, #18181b 100%);
 }
 
-/* Main content should take full width for responsive layouts */
 .main-content {
   width: 100%;
   max-width: 100%;
@@ -31,7 +28,7 @@ body {
   border: 4px solid #222;
   border-radius: 1.25rem;
   overflow-y: auto;
-  overflow-x: visible;
+  overflow-x: hidden; /* This should be hidden to prevent horizontal scroll */
   box-shadow: 0 0 40px 0 #000a;
   background: #18181b;
   box-sizing: border-box;
@@ -44,8 +41,17 @@ body {
 .mobile-preview .main-content,
 .mobile-preview .content {
   padding: 12px 0 !important;
-  max-width: 100vw !important;
-  width: 100vw !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  box-sizing: border-box;
+}
+
+/* Fix grid width so it never overflows frame */
+.mobile-preview .grid {
+  grid-template-columns: 1fr !important;
+  width: 100% !important;
+  max-width: 100% !important;
   margin: 0 !important;
   box-sizing: border-box;
 }
@@ -66,7 +72,6 @@ body {
   z-index: 10;
 }
 
-/* Make all buttons touch-friendly in mobile preview */
 .mobile-preview button,
 .mobile-preview input,
 .mobile-preview select {
@@ -76,7 +81,6 @@ body {
   touch-action: manipulation;
 }
 
-/* Card and item styling for mobile-preview */
 .mobile-preview .card,
 .mobile-preview .item-list-card {
   background: #23272f;
@@ -90,13 +94,4 @@ body {
 
 .mobile-preview .header {
   padding: 1rem 1.5rem;
-}
-
-/* Force single-column layout in mobile preview */
-.mobile-preview .grid {
-  grid-template-columns: 1fr !important;
-  width: 100vw !important;
-  max-width: 100vw !important;
-  margin: 0 !important;
-  box-sizing: border-box;
 }
