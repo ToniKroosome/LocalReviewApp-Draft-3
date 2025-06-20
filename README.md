@@ -13,6 +13,7 @@ A minimal Express server is provided in `server/index.js` to create Stripe Check
 ```bash
 npm install
 node server/index.js
+```
 
 Set your Stripe API keys before running the server:
 
