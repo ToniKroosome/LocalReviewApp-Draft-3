@@ -52,6 +52,8 @@ const App = () => {
     // Visibility states for search and filter UI controlled by Header buttons
     const [showSearchBar, setShowSearchBar] = useState(false);
     const [showFilters, setShowFilters] = useState(false);
+    const [mobilePreview, setMobilePreview] = useState(false);
+    const toggleMobilePreview = () => setMobilePreview(v => !v);
 
     useEffect(() => {
         localStorage.setItem('language', language);
@@ -296,7 +298,7 @@ const App = () => {
     }
     
  return (
-  <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-gray-100 font-sans antialiased pt-12">
+ <div className={`min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-gray-100 font-sans antialiased pt-12 ${mobilePreview ? 'mobile-preview' : ''}`}> 
     {/* Enhanced Header */}
     <Header
       showHeader={showHeader}
@@ -310,6 +312,8 @@ const App = () => {
       creditsBalance={creditsBalance}
       language={language}
       setLanguage={setLanguage}
+      mobilePreview={mobilePreview}
+      toggleMobilePreview={toggleMobilePreview}
       GoogleIcon={GoogleIcon}
     />
 
