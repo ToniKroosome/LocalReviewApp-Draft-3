@@ -18,10 +18,10 @@ const Header = ({
   GoogleIcon,
 }) => (
   <header
-    className={`header bg-gray-900/90 backdrop-blur-xl border-b border-gray-800/50 absolute top-0 left-0 w-full z-20 transition-transform duration-300 ${showHeader ? 'translate-y-0' : '-translate-y-full'}`}
-    style={{ minHeight: '48px', padding: '0.3rem 0' }}
+    className={`header bg-gray-900/90 backdrop-blur-xl border-b border-gray-800/50 w-full z-20 transition-transform duration-300 ${showHeader ? 'translate-y-0' : '-translate-y-full'}`}
+    style={{ minHeight: '48px', padding: '0.3rem 0', position: 'relative', top: 0, left: 0 }}
   >
-    {/* Change: flex-col for mobile, flex-row for sm+ */}
+    {/* Responsive: flex-col for mobile, flex-row for sm+ */}
     <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between px-3 py-1 gap-2">
       <div className="flex items-center gap-2">
         <div className="w-6 h-6 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
@@ -32,7 +32,7 @@ const Header = ({
         </h1>
         <span className="text-xs text-gray-400 ml-1">v.2.7</span>
       </div>
-      {/* Change: Make button group wrap and full width on mobile */}
+      {/* Button group wraps and is full width on mobile */}
       <div className="flex flex-wrap sm:flex-nowrap items-center gap-1 mt-2 sm:mt-0 w-full sm:w-auto">
         <button onClick={toggleSearchBar} className="p-1 text-gray-400 hover:text-gray-100 hover:bg-gray-800/50 rounded-lg" title="Search">
           <Search size={14} />
