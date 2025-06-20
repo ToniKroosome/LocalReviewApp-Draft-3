@@ -4,7 +4,14 @@ import { loadStripe } from '@stripe/stripe-js';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 import PromptPayQRModal from './PromptPayQRModal';
 
-const stripePromise = loadStripe('pk_test_placeholder');
+// Load Stripe using publishable key from environment. Falls back to a placeholder
+// key if not provided so the button can still render in dev.
+const stripePromise = loadStripe(
+  process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY || 'pk_test_placeholder'
+);
+
+// Base URL for the backend server handling Stripe Checkout
+const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:4242';
 
 const PaymentPage = ({ onBack, onComplete }) => {
   const [credits, setCredits] = useState(10);
@@ -20,7 +27,7 @@ const PaymentPage = ({ onBack, onComplete }) => {
 
   const handleStripeCheckout = async () => {
     try {
-      const res = await fetch('/create-checkout-session', {
+      const res = await fetch(`${API_BASE}/create-checkout-session`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ amount: credits }),
