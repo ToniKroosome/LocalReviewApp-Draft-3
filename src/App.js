@@ -298,34 +298,34 @@ const App = () => {
     }
     
   return (
-  <div className={`min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-gray-100 font-sans antialiased pt-12 ${mobilePreview ? 'mobile-preview' : ''}`}> 
-    {mobilePreview && (
-      <button
-        onClick={toggleMobilePreview}
-        className="fixed top-2 right-2 z-30 bg-blue-600 text-white p-2 rounded-full shadow hover:bg-blue-500"
-        title="Desktop view"
-        aria-label="Exit mobile preview and return to desktop view"
-      >
-        <Monitor size={20} />
-      </button>
-    )}
-    {/* Enhanced Header */}
-    <Header
-      showHeader={showHeader}
-      toggleSearchBar={toggleSearchBar}
-      toggleFilters={toggleFilters}
-      user={user}
-      handleLogin={handleLogin}
-      handleLogout={handleLogout}
-      setShowReviewForm={setShowReviewForm}
-      onBuyCredits={handleBuyCredits}
-      creditsBalance={creditsBalance}
-      language={language}
-      setLanguage={setLanguage}
-      mobilePreview={mobilePreview}
-      toggleMobilePreview={toggleMobilePreview}
-      GoogleIcon={GoogleIcon}
-    />
+    <div className={`min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-gray-100 font-sans antialiased pt-12 ${mobilePreview ? 'mobile-preview' : ''}`}> 
+      {mobilePreview && (
+        <button
+          onClick={toggleMobilePreview}
+          className="fixed top-2 right-2 z-30 bg-blue-600 text-white p-2 rounded-full shadow hover:bg-blue-500"
+          title="Desktop view"
+          aria-label="Exit mobile preview and return to desktop view"
+        >
+          <Monitor size={20} />
+        </button>
+      )}
+      {/* Enhanced Header */}
+      <Header
+        showHeader={showHeader}
+        toggleSearchBar={toggleSearchBar}
+        toggleFilters={toggleFilters}
+        user={user}
+        handleLogin={handleLogin}
+        handleLogout={handleLogout}
+        setShowReviewForm={setShowReviewForm}
+        onBuyCredits={handleBuyCredits}
+        creditsBalance={creditsBalance}
+        language={language}
+        setLanguage={setLanguage}
+        mobilePreview={mobilePreview}
+        toggleMobilePreview={toggleMobilePreview}
+        GoogleIcon={GoogleIcon}
+      />
 
       {showSearchBar && (
         <div className="px-4 py-2">
@@ -346,38 +346,38 @@ const App = () => {
         <FilterBar onFilterChange={handleFilterChange} language={language} />
       )}
 
-    {/* Main Content */}
-    <ItemList
-      filteredReviews={filteredReviews}
-      isAuthReady={isAuthReady}
-      handleItemClick={handleItemClick}
-      language={language}
-      categories={categories}
-      citiesData={citiesData}
-      bangkokStreetsData={bangkokStreetsData}
-      generatedImages={generatedImages}
-      setGeneratedImages={setGeneratedImages}
-      isLoadingNoMatchingReviewsMessage={isLoadingNoMatchingReviewsMessage}
-      noMatchingReviewsMessage={noMatchingReviewsMessage}
-      generateImage={generateImage}
-    />
-
-    {/* Modal */}
-    {showReviewForm && (
-      <ReviewFormModal
-        show={showReviewForm}
-        onClose={() => setShowReviewForm(false)}
-        newReview={newReview}
-        setNewReview={setNewReview}
-        onSubmit={handleSubmitReview}
+      {/* Main Content */}
+      <ItemList
+        filteredReviews={filteredReviews}
+        isAuthReady={isAuthReady}
+        handleItemClick={handleItemClick}
+        language={language}
         categories={categories}
         citiesData={citiesData}
         bangkokStreetsData={bangkokStreetsData}
-        language={language}
+        generatedImages={generatedImages}
+        setGeneratedImages={setGeneratedImages}
+        isLoadingNoMatchingReviewsMessage={isLoadingNoMatchingReviewsMessage}
+        noMatchingReviewsMessage={noMatchingReviewsMessage}
+        generateImage={generateImage}
       />
-    )}
-  </div>
-);
+
+      {/* Modal */}
+      {showReviewForm && (
+        <ReviewFormModal
+          show={showReviewForm}
+          onClose={() => setShowReviewForm(false)}
+          newReview={newReview}
+          setNewReview={setNewReview}
+          onSubmit={handleSubmitReview}
+          categories={categories}
+          citiesData={citiesData}
+          bangkokStreetsData={bangkokStreetsData}
+          language={language}
+        />
+      )}
+    </div>
+  );
 
 };
 
