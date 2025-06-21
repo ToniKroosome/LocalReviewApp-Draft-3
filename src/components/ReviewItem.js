@@ -53,10 +53,8 @@ const ReviewItem = ({
         item.category,
         item.subCategory,
         item.location.city,
-        currentItemImageStatus?.url,
-        currentItemImageStatus?.loading,
-        currentItemImageStatus?.error,
-        currentItemImageStatus?.retries,
+        currentItemImageStatus,
+        generateImage,
         setGeneratedImages
     ]);
 
@@ -104,7 +102,7 @@ const ReviewItem = ({
 
     return (
         <div
-            className={`relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-2xl shadow-lg border border-gray-700/50 p-2 cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:border-gray-600/50 max-w-[18rem] w-full mx-auto ${isHovered ? 'ring-2 ring-purple-500/20' : ''}`}
+            className={`item-list-card relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-2xl shadow-lg border border-gray-700/50 p-2 cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:border-gray-600/50 max-w-[18rem] w-full mx-auto ${isHovered ? 'ring-2 ring-purple-500/20' : ''}`}
             onClick={() => onClick(item)}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}

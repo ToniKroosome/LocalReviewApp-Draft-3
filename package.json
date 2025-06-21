@@ -12,7 +12,6 @@
     "@testing-library/user-event": "^13.5.0",
     "express": "^4.19.2",
     "lucide-react": "^0.516.0",
-    "promptpay-qr": "^1.2.0",
     "qrcode": "^1.5.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -22,7 +21,7 @@
     "@capacitor/core": "^5.4.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server/index.js",
     "build": "react-scripts build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
