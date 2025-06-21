@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Star, Camera, CheckCircle, User, TrendingUp, Calendar, Filter, Plus, X, ChevronDown, LogOut, Sparkles, MapPin, Globe, Heart, MessageCircle, Award, Clock, ArrowLeft, Smartphone, Monitor } from 'lucide-react';
+import { Search, Monitor } from 'lucide-react';
 import { initialSampleReviews } from './data/sampleReviews';
 import Header from './components/Header';
 import ItemList from './components/ItemList';
@@ -22,9 +22,9 @@ initScrollbarStyles();
 
 const App = () => {
     const [page, setPage] = useState('home'); // 'home', 'detail', 'payment'
-    const [selectedItem, setSelectedItem] = useState(null);
-    const [searchQuery, setSearchQuery] = useState('');
-    const [language, setLanguage] = useState(() => localStorage.getItem('language') || 'en');
+    const [selectedMainCategory] = useState('all');
+    const [selectedCategory] = useState('all');
+    const [selectedSubCategory] = useState('all');
     const [selectedMainCategory, setSelectedMainCategory] = useState('all');
     const [selectedCategory, setSelectedCategory] = useState('all');
     const [selectedSubCategory, setSelectedSubCategory] = useState('all');
