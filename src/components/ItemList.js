@@ -20,7 +20,7 @@ const ItemList = ({
   const [showImages, setShowImages] = useState(false);
 
   return (
-    <main className="max-w-7xl mx-auto px-4 py-8">
+    <main className="main-content px-1 py-4 sm:px-4 sm:py-8">
       <div className="flex justify-end mb-2">
         <button
           type="button"
@@ -41,25 +41,27 @@ const ItemList = ({
         ) : filteredReviews.length > 0 ? (
           filteredReviews.map((item) =>
             showImages ? (
-              <ReviewItem
-                key={item.id}
-                generateImage={generateImage}
-                item={item}
-                onClick={handleItemClick}
-                language={language}
-                categories={categories}
-                citiesData={citiesData}
-                bangkokStreetsData={bangkokStreetsData}
-                generatedImages={generatedImages}
-                setGeneratedImages={setGeneratedImages}
-              />
+              <div key={item.id} className="item-list-card">
+                <ReviewItem
+                  generateImage={generateImage}
+                  item={item}
+                  onClick={handleItemClick}
+                  language={language}
+                  categories={categories}
+                  citiesData={citiesData}
+                  bangkokStreetsData={bangkokStreetsData}
+                  generatedImages={generatedImages}
+                  setGeneratedImages={setGeneratedImages}
+                />
+              </div>
             ) : (
-              <CompactReviewCard
-                key={item.id}
-                item={item}
-                onDetails={handleItemClick}
-                language={language}
-              />
+              <div key={item.id} className="item-list-card">
+                <CompactReviewCard
+                  item={item}
+                  onDetails={handleItemClick}
+                  language={language}
+                />
+              </div>
             )
           )
         ) : (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Star, Camera, CheckCircle, User, TrendingUp, Calendar, Filter, Plus, X, ChevronDown, LogOut, Sparkles, MapPin, Globe, Heart, MessageCircle, Award, Clock, ArrowLeft } from 'lucide-react';
+import { Search, Star, Camera, CheckCircle, User, TrendingUp, Calendar, Filter, Plus, X, ChevronDown, LogOut, Sparkles, MapPin, Globe, Heart, MessageCircle, Award, Clock, ArrowLeft, Monitor } from 'lucide-react';
 import { initialSampleReviews } from './data/sampleReviews';
 import Header from './components/Header';
 import ItemList from './components/ItemList';
@@ -52,12 +52,14 @@ const App = () => {
     // Visibility states for search and filter UI controlled by Header buttons
     const [showSearchBar, setShowSearchBar] = useState(false);
     const [showFilters, setShowFilters] = useState(false);
+    const [mobilePreview, setMobilePreview] = useState(false);
 
     useEffect(() => {
         localStorage.setItem('language', language);
     }, [language]);
     const toggleSearchBar = () => setShowSearchBar(v => !v);
     const toggleFilters = () => setShowFilters(v => !v);
+    const toggleMobilePreview = () => setMobilePreview(v => !v);
 
     const [showHeader, setShowHeader] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(window.scrollY);
@@ -295,8 +297,8 @@ const App = () => {
         );
     }
     
- return (
-  <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-gray-100 font-sans antialiased pt-12">
+  return (
+  <div className={`min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-gray-100 font-sans antialiased pt-14 px-2 sm:px-6 transition-all duration-200 ${mobilePreview ? 'mobile-preview' : ''}`}>
     {/* Enhanced Header */}
     <Header
       showHeader={showHeader}
@@ -310,8 +312,21 @@ const App = () => {
       creditsBalance={creditsBalance}
       language={language}
       setLanguage={setLanguage}
+      mobilePreview={mobilePreview}
+      toggleMobilePreview={toggleMobilePreview}
       GoogleIcon={GoogleIcon}
     />
+
+    {mobilePreview && (
+      <button
+        onClick={toggleMobilePreview}
+        className="absolute top-2 right-2 z-30 bg-blue-600 text-white p-2 rounded-full shadow-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
+        title="Desktop view"
+        aria-label="Exit mobile preview and return to desktop view"
+      >
+        <Monitor size={20} />
+      </button>
+    )}
 
       {showSearchBar && (
         <div className="px-4 py-2">
