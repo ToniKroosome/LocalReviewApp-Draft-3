@@ -53,10 +53,8 @@ const ReviewItem = ({
         item.category,
         item.subCategory,
         item.location.city,
-        currentItemImageStatus?.url,
-        currentItemImageStatus?.loading,
-        currentItemImageStatus?.error,
-        currentItemImageStatus?.retries,
+        currentItemImageStatus,
+        generateImage,
         setGeneratedImages
     ]);
 

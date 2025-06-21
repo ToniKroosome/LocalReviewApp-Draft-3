@@ -40,4 +40,4 @@ Developers can maintain this feature by editing the `.mobile-preview` CSS block 
 
 1. Ensure your `.env` file defines secrets like `STRIPE_SECRET_KEY` without committing it to Git.
 2. Set the start script to `node server/index.js`.
-3. Deploy to a Node-friendly host such as Render or Railway. Use `npm install` as the build command and `npm start` as the start command.
+3. Deploy to a Node-friendly host such as Render or Railway. Use `npm install` as the build command and **`npm start`** (or `node server/index.js`) as the start command. If using Render, be sure the start command begins with `node` so the server runs correctly.

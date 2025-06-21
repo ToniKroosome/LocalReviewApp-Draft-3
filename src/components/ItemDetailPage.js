@@ -79,11 +79,8 @@ useEffect(() => {
 }, [
   // deps must include `item` so we bail early when !item
   item,
-  // track the status fields
-  currentItemImageStatus?.url,
-  currentItemImageStatus?.loading,
-  currentItemImageStatus?.error,
-  currentItemImageStatus?.retries,
+  currentItemImageStatus,
+  generateImage,
   // and of course the setter
   setGeneratedImages,
 ]);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Star, Camera, CheckCircle, User, TrendingUp, Calendar, Filter, Plus, X, ChevronDown, LogOut, Sparkles, MapPin, Globe, Heart, MessageCircle, Award, Clock, ArrowLeft, Smartphone, Monitor } from 'lucide-react';
+import { Search, Monitor } from 'lucide-react';
 import { initialSampleReviews } from './data/sampleReviews';
 import Header from './components/Header';
 import ItemList from './components/ItemList';
@@ -25,9 +25,9 @@ const App = () => {
     const [selectedItem, setSelectedItem] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
     const [language, setLanguage] = useState(() => localStorage.getItem('language') || 'en');
-    const [selectedMainCategory, setSelectedMainCategory] = useState('all');
-    const [selectedCategory, setSelectedCategory] = useState('all');
-    const [selectedSubCategory, setSelectedSubCategory] = useState('all');
+    const [selectedMainCategory] = useState('all');
+    const [selectedCategory] = useState('all');
+    const [selectedSubCategory] = useState('all');
     const [selectedFilters, setSelectedFilters] = useState({
         category: 'All Categories',
         shopType: '',
@@ -51,13 +51,13 @@ const App = () => {
     const [showFilters, setShowFilters] = useState(false);
     const [mobilePreview, setMobilePreview] = useState(false);
 
+    const toggleSearchBar = () => setShowSearchBar(v => !v);
+    const toggleFilters = () => setShowFilters(v => !v);
     const toggleMobilePreview = () => setMobilePreview(v => !v);
 
     useEffect(() => {
         localStorage.setItem('language', language);
     }, [language]);
-    const toggleSearchBar = () => setShowSearchBar(v => !v);
-    const toggleFilters = () => setShowFilters(v => !v);
 
     const [showHeader, setShowHeader] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(window.scrollY);
@@ -292,9 +292,7 @@ const App = () => {
         );
     }
 
-    // ---- MINIMAL EDIT TO PREVENT HORIZONTAL SCROLLBAR IN MOBILE PREVIEW ----
-    // Add style={{ overflowX: mobilePreview ? 'hidden' : undefined }} to the main wrapper div
-
+    // MINIMAL EDIT: prevent horizontal scroll in mobile preview mode
     return (
         <div
             className={`min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-gray-100 font-sans antialiased pt-14 px-2 sm:px-6 transition-all duration-200 ${mobilePreview ? 'mobile-preview' : ''}`}
@@ -303,13 +301,14 @@ const App = () => {
             {mobilePreview && (
                 <button
                     onClick={toggleMobilePreview}
-                    className="fixed top-2 right-2 z-30 bg-blue-600 text-white p-2 rounded-full shadow-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
-                    title="Desktop view"
+                    className="absolute top-2 right-2 z-30 bg-blue-600 text-white p-2 rounded-full shadow-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                    title="Exit mobile preview"
                     aria-label="Exit mobile preview and return to desktop view"
                 >
                     <Monitor size={20} />
                 </button>
             )}
+
             {/* Enhanced Header */}
             <Header
                 showHeader={showHeader}
