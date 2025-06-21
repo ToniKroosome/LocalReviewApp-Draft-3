@@ -35,10 +35,9 @@ The app includes a **phone view** toggle for quickly testing mobile layouts in t
 Use the smartphone button in the header to enter mobile preview. The button includes an accessible label and changes color when active. While in phone view, a floating monitor icon appears inside the frame so you can return to the regular web layout at any time.
 
 Developers can maintain this feature by editing the `.mobile-preview` CSS block in `src/index.css` and the toggle logic in `src/App.js` and `src/components/Header.js`. Keep interactive elements sized for touch input and avoid fixed widths that could cause horizontal clipping.
+
 ## Deployment
 
 1. Ensure your `.env` file defines secrets like `STRIPE_SECRET_KEY` without committing it to Git.
 2. Set the start script to `node server/index.js`.
 3. Deploy to a Node-friendly host such as Render or Railway. Use `npm install` as the build command and `npm start` as the start command.
-
-

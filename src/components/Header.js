@@ -15,14 +15,14 @@ const Header = ({
   setLanguage,
   mobilePreview,
   toggleMobilePreview,
-  
   GoogleIcon,
 }) => (
   <header
-    className={`header relative bg-gray-900/90 backdrop-blur-xl border-b border-gray-800/50 fixed top-0 w-full z-20 transition-transform duration-300 ${showHeader ? 'translate-y-0' : '-translate-y-full'}`}
-    style={{ minHeight: '48px', padding: '0.3rem 0' }}
+    className={`header bg-gray-900/90 backdrop-blur-xl border-b border-gray-800/50 w-full z-20 transition-transform duration-300 ${showHeader ? 'translate-y-0' : '-translate-y-full'}`}
+    style={{ minHeight: '48px', padding: '0.3rem 0', position: 'relative', top: 0, left: 0 }}
   >
-    <div className="max-w-4xl mx-auto flex items-center justify-between px-3 py-1 gap-2">
+    {/* Responsive: flex-col for mobile, flex-row for sm+ */}
+    <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between px-3 py-1 gap-2">
       <div className="flex items-center gap-2">
         <div className="w-6 h-6 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
           <Award className="text-white" size={16} />
@@ -32,14 +32,16 @@ const Header = ({
         </h1>
         <span className="text-xs text-gray-400 ml-1">v.2.7</span>
       </div>
-      <div className="flex items-center gap-1">
+      {/* Button group wraps and is full width on mobile */}
+      <div className="flex flex-wrap sm:flex-nowrap items-center gap-1 mt-2 sm:mt-0 w-full sm:w-auto">
         <button onClick={toggleSearchBar} className="p-1 text-gray-400 hover:text-gray-100 hover:bg-gray-800/50 rounded-lg" title="Search">
           <Search size={14} />
         </button>
         <button onClick={toggleFilters} className="p-1 text-gray-400 hover:text-gray-100 hover:bg-gray-800/50 rounded-lg" title="Filters">
           <Filter size={14} />
         </button>
-        <div className="w-px h-5 bg-gray-700 mx-1"></div>
+        {/* Divider only on sm+ */}
+        <div className="w-px h-5 bg-gray-700 mx-1 hidden sm:block"></div>
         {user ? (
           <>
             <img src={user.photoURL} alt={user.displayName} className="w-6 h-6 rounded-full" />
@@ -72,12 +74,11 @@ const Header = ({
         </button>
         <button
           onClick={toggleMobilePreview}
-          className={`p-2 rounded-md ml-1 border-2 transition-colors ${mobilePreview ? 'bg-blue-950 text-blue-200 border-blue-400' : 'text-gray-300 border-transparent hover:text-blue-500 hover:bg-gray-800/50'}`}
+          className={`p-1 rounded-lg ml-1 border-2 ${mobilePreview ? 'bg-blue-950 text-blue-300 border-blue-400' : 'text-gray-400 border-transparent hover:text-blue-500 hover:bg-gray-800/50'}`}
           title={mobilePreview ? 'Switch to Desktop View' : 'Switch to Mobile View'}
-          aria-label={mobilePreview ? 'Switch to desktop view' : 'Switch to mobile view'}
-          aria-pressed={mobilePreview}
+          aria-label={mobilePreview ? 'Desktop view' : 'Mobile preview'}
         >
-          <Smartphone size={20} />
+          <Smartphone size={16} />
         </button>
       </div>
     </div>
