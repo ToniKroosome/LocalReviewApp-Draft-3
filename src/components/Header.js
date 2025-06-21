@@ -15,7 +15,6 @@ const Header = ({
   setLanguage,
   mobilePreview,
   toggleMobilePreview,
-  
   GoogleIcon,
 }) => (
   <header
@@ -32,14 +31,14 @@ const Header = ({
         </h1>
         <span className="text-xs text-gray-400 ml-1">v.2.7</span>
       </div>
-      <div className="flex items-center gap-1">
+      <div className="flex flex-wrap sm:flex-nowrap items-center gap-1 mt-2 sm:mt-0 w-full sm:w-auto">
         <button onClick={toggleSearchBar} className="p-1 text-gray-400 hover:text-gray-100 hover:bg-gray-800/50 rounded-lg" title="Search">
           <Search size={14} />
         </button>
         <button onClick={toggleFilters} className="p-1 text-gray-400 hover:text-gray-100 hover:bg-gray-800/50 rounded-lg" title="Filters">
           <Filter size={14} />
         </button>
-        <div className="w-px h-5 bg-gray-700 mx-1"></div>
+        <div className="w-px h-5 bg-gray-700 mx-1 hidden sm:block"></div>
         {user ? (
           <>
             <img src={user.photoURL} alt={user.displayName} className="w-6 h-6 rounded-full" />
