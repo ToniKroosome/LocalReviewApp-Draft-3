@@ -32,7 +32,7 @@ See [docs/mobile-app.md](docs/mobile-app.md) for steps to wrap the app using Cap
 
 The app includes a **phone view** toggle for quickly testing mobile layouts in the browser. When enabled, a simulated phone frame constrains the width to about 390&nbsp;px and adds a shadowed border. All content remains scrollable within this frame.
 
-Use the smartphone button in the header to enter mobile preview. When active, a floating monitor icon lets you return to desktop view.
+Use the smartphone button in the header to enter mobile preview. The button includes an accessible label and changes color when active. While in phone view, a floating monitor icon appears inside the frame so you can return to the regular web layout at any time.
 
 Developers can maintain this feature by editing the `.mobile-preview` CSS block in `src/index.css` and the toggle logic in `src/App.js` and `src/components/Header.js`. Keep interactive elements sized for touch input and avoid fixed widths that could cause horizontal clipping.
 
